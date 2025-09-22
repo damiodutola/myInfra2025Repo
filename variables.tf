@@ -1,51 +1,59 @@
 variable "aws_region" {
-       description = "The AWS region to create things in." 
-       default     = "us-east-1" 
+  description = "The AWS region to deploy resources in"
+  type        = string
+  default     = "us-east-1"
 }
 
-variable "key_name" { 
-    description = " SSH keys to connect to ec2 instance" 
-    default     =  "sshkeys" 
+variable "ami_id" {
+  description = "AMI ID for the EC2 instance"
+  type        = string
 }
 
-variable "instance_type" { 
-    description = "instance type for ec2" 
-    default     =  "t2.micro" 
+variable "instance_type" {
+  description = "Instance type for the EC2 instance"
+  type        = string
 }
 
-variable "security_group" { 
-    description = "Name of security group" 
-    default     = "my-jenkins-security-group-apr-2024" 
+variable "key_name" {
+  description = "Name of the EC2 key pair to use"
+  type        = string
 }
 
-variable "tag_name" { 
-    description = "Tag Name of for Ec2 instance" 
-    default     = "my-ec2-instance" 
-} 
-variable "ami_id" { 
-    description = "AMI for Ubuntu Ec2 instance" 
-    default     = "ami-0a7d80731ae1b2435" 
+variable "tag_name" {
+  description = "Base name to tag the EC2 instance"
+  type        = string
 }
-variable "versioning" {
-    type        = bool
-    description = "(Optional) A state of versioning."
-    default     = true
+
+variable "environment" {
+  description = "Deployment environment (dev, qa, prod)"
+  type        = string
 }
-variable "acl" {
-    type        = string
-    description = " Defaults to private "
-    default     = "private"
-}
-variable "bucket_prefix" {
-    type        = string
-    description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
-    default     = "my-s3bucket-"
-}
+
 variable "tags" {
-    type        = map
-    description = "(Optional) A mapping of tags to assign to the bucket."
-    default     = {
-        environment = "DEV"
-        terraform   = "true"
-    }
+  description = "Common tags to apply to resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "bucket_prefix" {
+  description = "Prefix for S3 bucket name"
+  type        = string
+}
+
+variable "acl" {
+  description = "ACL for the S3 bucket"
+  type        = string
+  default     = "private"
+}
+
+variable "versioning" {
+  description = "Enable versioning for the S3 bucket"
+  type        = bool
+  default     = true
+}
+
+variable "allocation_id" {
+  description = "Elastic IP allocation ID (only for prod)"
+  type        = string
+  default     = ""
 }
