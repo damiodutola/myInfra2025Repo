@@ -7,26 +7,31 @@ variable "aws_region" {
 variable "ami_id" {
   description = "AMI ID for the EC2 instance"
   type        = string
+  default     = "ami-0f8a61b66d1accaee"
 }
 
 variable "instance_type" {
   description = "Instance type for the EC2 instance"
   type        = string
+  default     = "t2.micro"
 }
 
 variable "key_name" {
   description = "Name of the EC2 key pair to use"
   type        = string
+  default     = "Dami_KeyPair2026"
 }
 
 variable "tag_name" {
   description = "Base name to tag the EC2 instance"
   type        = string
+  default     = "my-ec2-instance-terraform2026"
 }
 
 variable "environment" {
   description = "Deployment environment (dev, qa, prod)"
   type        = string
+  default     = "dev"
 }
 
 variable "tags" {
@@ -38,6 +43,7 @@ variable "tags" {
 variable "bucket_prefix" {
   description = "Prefix for S3 bucket name"
   type        = string
+  default     = "my-dev-tf-state-bucket-2026"
 }
 
 variable "acl" {
